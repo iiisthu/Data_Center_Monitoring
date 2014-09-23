@@ -38,3 +38,11 @@ net_out = (out_after_sleep - out_before_sleep)/5
 # Get date and time
 
 date_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+# Write the status data into a txt file (BY APPENDING!)
+
+status = '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' %(date_time, str(cpu_usage), str(memory_usage), str(data_input), str(data_output), str(net_in), str(net_out))
+
+output = open('status.txt','a')
+output.write(str(status))
+output.close()
