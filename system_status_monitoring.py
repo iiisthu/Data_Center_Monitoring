@@ -3,46 +3,55 @@
 
 import psutil,datetime,time
 
-second = 5 # Time tick for counting.
+# Start iteration in every five minutes.
 
-# CPU usage of all the cores (threads) in one server.
+while 1:
 
-cpu_usage = psutil.cpu_percent(interval=1)
+    second = 5 # Time tick for counting.
+    interval = 300 # Time interval between collections.
 
-# Memory usage
+    # CPU usage of all the cores (threads) in one server.
 
-memory_usage = psutil.swap_memory()[3]
+    cpu_usage = psutil.cpu_percent(interval=1)
 
-# Hard disk usage: data input and data output among all the disks (bytes/second).
+    # Memory usage
 
-input_before_sleep = psutil.disk_io_counters()[2]
-output_before_sleep = psutil.disk_io_counters()[3]
-time.sleep(second)
-input_after_sleep = psutil.disk_io_counters()[2]
-output_after_sleep = psutil.disk_io_counters()[3]
+    memory_usage = psutil.swap_memory()[3]
 
-data_input = (input_after_sleep - input_before_sleep)/5
-data_output = (output_after_sleep - output_before_sleep)/5
+    # Hard disk usage: data input and data output among all the disks (bytes/second).
 
-# Network usage: data transfered in and out (bytes/second).
+    input_before_sleep = psutil.disk_io_counters()[2]
+    output_before_sleep = psutil.disk_io_counters()[3]
+    time.sleep(second)
+    input_after_sleep = psutil.disk_io_counters()[2]
+    output_after_sleep = psutil.disk_io_counters()[3]
 
-in_before_sleep = psutil.net_io_counters()[0]
-out_before_sleep = psutil.net_io_counters()[1]
-time.sleep(second)
-in_after_sleep = psutil.net_io_counters()[0]
-out_after_sleep = psutil.net_io_counters()[1]
+    data_input = (input_after_sleep - input_before_sleep)/5
+    data_output = (output_after_sleep - output_before_sleep)/5
 
-net_in = (in_after_sleep - in_before_sleep)/5
-net_out = (out_after_sleep - out_before_sleep)/5
+    # Network usage: data transfered in and out (bytes/second).
 
-# Get date and time
+    in_before_sleep = psutil.net_io_counters()[0]
+    out_before_sleep = psutil.net_io_counters()[1]
+    time.sleep(second)
+    in_after_sleep = psutil.net_io_counters()[0]
+    out_after_sleep = psutil.net_io_counters()[1]
 
-date_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    net_in = (in_after_sleep - in_before_sleep)/5
+    net_out = (out_after_sleep - out_before_sleep)/5
 
-# Write the status data into a txt file (BY APPENDING!)
+    # Get date and time
 
-status = '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' %(date_time, str(cpu_usage), str(memory_usage), str(data_input), str(data_output), str(net_in), str(net_out))
+    date_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-output = open('status.txt','a')
-output.write(str(status))
-output.close()
+    # Write the status data into a txt file (BY APPENDING!)
+
+    status = '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' %(date_time, str(cpu_usage), str(memory_usage), str(data_input), str(data_output), str(net_in), str(net_out))
+
+    output = open('status.txt','a')
+    output.write(str(status))
+    output.close()
+
+    # Wait for five minutes until the next collection.
+
+    time.sleep(interval)
