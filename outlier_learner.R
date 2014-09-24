@@ -10,5 +10,18 @@ library(DMwR)
 
 # The function is lofactor(data, k), where k is the number of neighbours (refer to the paper).
 # For a complete understanding of the function, please refer to the book or just use "??lofactor" command.
+k = 3
+m = 5 # Number of desired LOs.
 
+# Read the status data file into R.
+rawdata <- read.table("C:\\Users\\S.Wang\\Documents\\GitHub\\Temperature_Monitoring\\status.txt", header = T)
+# Get the useful columns.
+data <- rawdata[,3:8]
 
+# Calculate the LOFs for each record.
+lof <- lofactor(data,k)
+result.data <- cbind(rawdata, lof)
+
+# Get the most suspectable five records.
+lof.sort <- sort(lof, decreasing = T, index.return = T)
+print(result.data[lof.sort[[2]][1:m],])
