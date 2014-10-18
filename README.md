@@ -1,4 +1,4 @@
-Temperature_Monitoring
+Data_Center_Monitoring
 ======================
 
-The scripts for analyzing temperature data collected in the data center.
+The programs for learning the dynamics and temperature data collected in the data center.
