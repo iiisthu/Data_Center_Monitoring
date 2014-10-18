@@ -1,7 +1,7 @@
 # Needs psutil module, documentation: http://pythonhosted.org/psutil/
 # We will use the CollectD coded by HuaWei in the research. Before done, we will use the psutil module in the simulation.
 
-import psutil,datetime,time
+import psutil,datetime,time,socket
 
 # Start iteration in every five minutes.
 
@@ -10,6 +10,10 @@ while 1:
     second = 5 # Time tick for counting.
     interval = 300 # Time interval between collections.
 
+    # Get IP address.
+
+    IP = socket.gethostbyname(socket.gethostname())
+    
     # CPU usage of all the cores (threads) in one server.
 
     cpu_usage = psutil.cpu_percent(interval=1)
@@ -46,7 +50,7 @@ while 1:
 
     # Write the status data into a txt file (BY APPENDING!)
 
-    status = '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' %(date_time, str(cpu_usage), str(memory_usage), str(data_input), str(data_output), str(net_in), str(net_out))
+    status = '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' %(str(IP),date_time, str(cpu_usage), str(memory_usage), str(data_input), str(data_output), str(net_in), str(net_out))
 
     output = open('status.txt','a')
     output.write(str(status))

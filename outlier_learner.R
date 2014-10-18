@@ -16,7 +16,7 @@ m = 5 # Number of desired LOs.
 # Read the status data file into R.
 rawdata <- read.table("C:\\Users\\S.Wang\\Documents\\GitHub\\Temperature_Monitoring\\status.txt", header = T)
 # Get the useful columns.
-data <- rawdata[,3:8]
+data <- rawdata[,4:9]
 # Be sure to normalize data
 for(i in 1:6) data[,i] = (data[,i]-mean(data[,i]))/(max(data[,i])-min(data[,i]))
 # Calculate the LOFs for each record.
