@@ -13,14 +13,15 @@ while 1:
     # Get IP address.
 
     IP = socket.gethostbyname(socket.gethostname())
-    
+
     # CPU usage of all the cores (threads) in one server.
 
     cpu_usage = psutil.cpu_percent(interval=1)
 
     # Memory usage
 
-    memory_usage = psutil.swap_memory()[3]
+    swap_memory_usage = psutil.swap_memory()[3]
+    physical_memory_usage = psutil.virtual_memory()[2]
 
     # Hard disk usage: data input and data output among all the disks (bytes/second).
 
@@ -50,9 +51,9 @@ while 1:
 
     # Write the status data into a txt file (BY APPENDING!)
 
-    status = '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' %(str(IP),date_time, str(cpu_usage), str(memory_usage), str(data_input), str(data_output), str(net_in), str(net_out))
+    status = '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' %(str(IP),date_time, str(cpu_usage), str(swap_memory_usage), str(physical_memory_usage), str(data_input), str(data_output), str(net_in), str(net_out))
 
-    output = open('status.txt','a')
+    output = open('/home/lihu/monitor/status.txt','a')
     output.write(str(status))
     output.close()
 
