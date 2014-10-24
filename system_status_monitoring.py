@@ -52,8 +52,6 @@ def collectStatus():
     output.write(str(status))
     output.close()
 
-    return time_on_written
-
 # Start iteration in EXACTLY every five minutes.
 if __name__ == "__main__":
 
@@ -62,6 +60,7 @@ if __name__ == "__main__":
     
     while 1:
         if (datetime.datetime.now()- time_now).seconds >= 300:
-            time_now = collectStatus()
+            time_now = datetime.datetime.now()
+            collectStatus()
         else:
             time.sleep(1)
