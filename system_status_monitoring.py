@@ -60,7 +60,6 @@ if __name__ == "__main__":
     
     while 1:
         if float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)) > 299.5:
-            print float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds))
             time_now = datetime.datetime.now()
             collectStatus()
         else:
