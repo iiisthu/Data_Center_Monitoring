@@ -1,5 +1,0 @@
-#! /bin/bash
-while sleep 20
-do
-python system_status_monitoring.py
-done
