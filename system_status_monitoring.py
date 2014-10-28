@@ -59,7 +59,8 @@ if __name__ == "__main__":
     time_now = datetime.datetime.now()
     
     while 1:
-        if float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)) > 299.5:
+        if float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)) >= 299.0:
+            time.sleep(300.0-float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)))
             time_now = datetime.datetime.now()
             collectStatus()
         else:
