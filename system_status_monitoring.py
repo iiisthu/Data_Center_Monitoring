@@ -1,10 +1,18 @@
-# Needs psutil module, documentation: http://pythonhosted.org/psutil/
-# We will use the CollectD coded by HuaWei in the research. Before done, we will use the psutil module in the simulation.
+import psutil,datetime,time,socket,MySQLdb
 
-import psutil,datetime,time,socket
+def writeIntoDb(sql):
+    try:
+        conn=MySQLdb.connect(host='10.1.0.5',user='root',passwd='root123',db='monitor',port=3306)
+        cur=conn.cursor()
+        cur.execute(sql)
+        cur.close()
+        conn.close()
+    except MySQLdb.Error,e:
+        output = open('status.txt','a')
+        output.write("Mysql Error %d: %s" % (e.args[0], e.args[1]))
+        output.close()
 
 def collectStatus():
-
     second = 5 # Time tick for counting.
 
     # Get date and time
@@ -44,13 +52,10 @@ def collectStatus():
     net_in = (in_after_sleep - in_before_sleep)/5
     net_out = (out_after_sleep - out_before_sleep)/5
 
-    # Write the status data into a txt file (BY APPENDING!)
+    # Write the status data into the database
 
-    status = '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' %(str(IP),date_time, str(cpu_usage), str(swap_memory_usage), str(physical_memory_usage), str(data_input), str(data_output), str(net_in), str(net_out))
-
-    output = open('status.txt','a')
-    output.write(str(status))
-    output.close()
+    sql = 'insert into status (ip,dtime,cpu,pmemory,smemory,diskin,diskout,netin,netout) values (\''+str(IP)+'\',\''+date_time+'\','+str(cpu_usage)+','+str(physical_memory_usage)+','+str(swap_memory_usage)+','+str(data_input)+','+str(data_output)+','+str(net_in)+','+str(net_out)+');'
+    writeIntoDb(sql)
 
 # Start iteration in EXACTLY every five minutes.
 if __name__ == "__main__":
