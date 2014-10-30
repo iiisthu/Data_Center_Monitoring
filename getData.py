@@ -8,8 +8,8 @@ try:
     rows = cur.fetchall()
     output = open('data.txt','w')
     for row in rows:
-        status = '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' %(row[0],row[1].strftime('%Y-%m-%d %H:%M:%S'), str(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]), str(row[8]))
-        output.write(str(status))
+        status = '%s\t%s\t%.2f\t%.2f\t%.2f\t%d\t%d\t%d\t%d\n' %(row[0],row[1].strftime('%Y-%m-%d %H:%M:%S'), row[2], row[3], row[4], row[5], row[6], row[7], row[8])
+        output.write(status)
     output.close()
     cur.close()
     conn.close()
