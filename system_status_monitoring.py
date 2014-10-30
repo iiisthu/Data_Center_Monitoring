@@ -9,7 +9,8 @@ def writeIntoDb(sql):
         conn.close()
     except MySQLdb.Error,e:
         output = open('status.txt','a')
-        output.write("Mysql Error %d: %s" % (e.args[0], e.args[1]))
+        output.write("\nSQL: %s\n" % (sql))
+        output.write("Mysql Error %d: %s\n" % (e.args[0], e.args[1]))
         output.close()
 
 def collectStatus():
