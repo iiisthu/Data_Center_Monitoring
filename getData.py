@@ -6,7 +6,7 @@ try:
     cur=conn.cursor()
     cur.execute(sql)
     rows = cur.fetchall()
-    output = open('data.txt','a')
+    output = open('data.txt','w')
     for row in rows:
         status = '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' %(row[0],row[1].strftime('%Y-%m-%d %H:%M:%S'), str(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]), str(row[8]))
         output.write(str(status))
