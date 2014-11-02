@@ -5,6 +5,7 @@ def writeIntoDb(sql):
         conn=MySQLdb.connect(host='10.1.0.5',user='root',passwd='root123',db='monitor',port=3306)
         cur=conn.cursor()
         cur.execute(sql)
+        conn.commit()
         cur.close()
         conn.close()
     except MySQLdb.Error,e:
@@ -65,8 +66,8 @@ if __name__ == "__main__":
     time_now = datetime.datetime.now()
     
     while 1:
-        if float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)) >= 299.0:
-            time.sleep(300.0-float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)))
+        if float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)) >= 29.0:
+            time.sleep(30.0-float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)))
             time_now = datetime.datetime.now()
             collectStatus()
         else:
