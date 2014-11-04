@@ -13,6 +13,9 @@ def writeIntoDb(sql):
         output.write("\nSQL: %s\n" % (sql))
         output.write("Mysql Error %d: %s\n" % (e.args[0], e.args[1]))
         output.close()
+        output = open('status.sql','a')
+        output.write("%s\n" % (sql))
+        output.close()
 
 def collectStatus():
     second = 5 # Time tick for counting.
@@ -64,10 +67,11 @@ if __name__ == "__main__":
 
     global time_now
     time_now = datetime.datetime.now()
+    timer = 300.0
     
     while 1:
-        if float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)) >= 29.0:
-            time.sleep(30.0-float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)))
+        if float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)) >= (timer-1.0):
+            time.sleep(timer-float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)))
             time_now = datetime.datetime.now()
             collectStatus()
         else:

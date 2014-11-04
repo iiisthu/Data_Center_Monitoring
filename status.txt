@@ -37,3 +37,14 @@
 10.1.0.5	2014-10-29 07:27:21	0.5	3.4	0.0	0	40960	6387	8937	22.3
 10.1.0.78	2014-10-29 07:29:43	0.3	3.0	0.0	0	6553	23121644	68377927	24.2
 10.1.0.5	2014-10-29 07:32:21	0.5	3.4	0.0	0	1638	5678	5623	22.8
+SQL: insert into status (ip,dtime,cpu,pmemory,smemory,diskin,diskout,netin,netout) values ('192.168.1.104','2014-11-04 21:20:59',4.9,42.6,26.5,432537,85504,563,302);
+Mysql Error 2003: Can't connect to MySQL server on '10.1.0.5' (10060)
+
+SQL: insert into status (ip,dtime,cpu,pmemory,smemory,diskin,diskout,netin,netout) values ('192.168.1.104','2014-11-04 21:21:29',17.6,44.0,27.2,5872025,14390886,623,139);
+Mysql Error 2003: Can't connect to MySQL server on '10.1.0.5' (10060)
+
+SQL: insert into status (ip,dtime,cpu,pmemory,smemory,diskin,diskout,netin,netout) values ('192.168.1.104','2014-11-04 21:21:59',5.6,43.1,26.7,1975910,1444249,664,417);
+Mysql Error 2003: Can't connect to MySQL server on '10.1.0.5' (10060)
+
+SQL: insert into status (ip,dtime,cpu,pmemory,smemory,diskin,diskout,netin,netout) values ('192.168.1.104','2014-11-04 21:22:29',5.1,42.9,26.7,3276,56832,428,27);
+Mysql Error 2003: Can't connect to MySQL server on '10.1.0.5' (10060)
