@@ -1,0 +1,2 @@
+*/5 0-23 * * * /ect/init.d/mysql start
+*/5 0-23 * * * python /usr/monitor/system_status_monitoring.py

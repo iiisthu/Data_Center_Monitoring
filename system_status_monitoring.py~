@@ -64,4 +64,15 @@ def collectStatus():
 
 # Start iteration in EXACTLY every five minutes.
 if __name__ == "__main__":
-	collectStatus()
+
+    global time_now
+    time_now = datetime.datetime.now()
+    timer = 300.0
+    
+    while 1:
+        if float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)) >= (timer-1.0):
+            time.sleep(timer-float(str((datetime.datetime.now() - time_now).seconds)+"."+ str((datetime.datetime.now() - time_now).microseconds)))
+            time_now = datetime.datetime.now()
+            collectStatus()
+        else:
+            time.sleep(1)
