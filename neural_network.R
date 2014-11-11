@@ -34,7 +34,7 @@ predictions.explict <- rep(0, length = nrow(predictions))
 test.explict <- rep(0, length = nrow(predictions))
 for(i in 1:nrow(predictions)){
   predictions.explict[i] <- coordinate.data[coordinate.data[, 2] == encodeClassLabels(predictions)[i], ][1, 1]
-  # Get bcak the true value of the test inputs.
+  # Get back the true value of the test inputs.
   test.explict[i] <- coordinate.data[coordinate.data[, 2] == encodeClassLabels(data$targetsTest)[i], ][1, 1]
 } 
 
