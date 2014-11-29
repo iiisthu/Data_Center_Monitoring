@@ -1,4 +1,4 @@
-sudo yum install -y gcc python-devel
+sudo yum install -y gcc python-devel MYSQL-python
 cd ./psutil-master
 chmod +x setup.py
 sudo python setup.py install
