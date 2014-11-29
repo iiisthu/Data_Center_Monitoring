@@ -1,4 +1,12 @@
-import psutil,datetime,time,socket,MySQLdb
+import psutil,datetime,time,socket,MySQLdb,fcntl,struct
+
+def get_ip_address(ifname):
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    return socket.inet_ntoa(fcntl.ioctl(
+        s.fileno(),
+        0x8915,  # SIOCGIFADDR
+        struct.pack('256s', ifname[:15])
+    )[20:24])
 
 def writeIntoDb(sql):
     try:
@@ -27,7 +35,7 @@ def collectStatus():
     
     # Get IP address.
 
-    IP = socket.gethostbyname(socket.gethostname())
+    IP = get_ip_address("eth0")
 
     # CPU usage of all the cores (threads) in one server.
 
