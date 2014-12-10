@@ -5,7 +5,7 @@
 # Therefore, we need to install the package named "DMwR".
 # Note: In Mac or Linux, one may use the package named "Rlof", which performs better in multicores.
 
-install.packages("DMwR") # Omit when completed.
+# install.packages("DMwR") # Omit when completed.
 library(DMwR)
 
 # The function is lofactor(data, k), where k is the number of neighbours (refer to the paper).
@@ -14,7 +14,7 @@ k = 3
 m = 5 # Number of desired LOs.
 
 # Read the status data file into R.
-rawdata <- read.table("C:\\Users\\S.Wang\\Documents\\GitHub\\Temperature_Monitoring\\status.txt", header = T)
+rawdata <- read.table("/home/swang/Documents/GitHub/Data_Center_Monitoring/data.txt", header = F)
 # Get the useful columns.
 data <- rawdata[,4:11]
 # Be sure to normalize data
