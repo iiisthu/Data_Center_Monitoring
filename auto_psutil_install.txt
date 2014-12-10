@@ -1,0 +1,7 @@
+sudo yum install -y gcc python-devel MYSQL-python
+cd ./psutil-master
+chmod +x setup.py
+sudo python setup.py install
+crontab -e
+
+0,5,10,15,20,25,30,35,40,45,50,55 * * * * python /home/user/monitor/system_status_monitoring.py

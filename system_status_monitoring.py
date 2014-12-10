@@ -1,19 +1,27 @@
-import psutil,datetime,time,socket,MySQLdb
+import psutil,datetime,time,socket,MySQLdb,fcntl,struct
+
+def get_ip_address(ifname):
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    return socket.inet_ntoa(fcntl.ioctl(
+        s.fileno(),
+        0x8915,  # SIOCGIFADDR
+        struct.pack('256s', ifname[:15])
+    )[20:24])
 
 def writeIntoDb(sql):
     try:
         conn=MySQLdb.connect(host='10.1.0.5',user='root',passwd='root123',db='monitor',port=3306)
         cur=conn.cursor()
         cur.execute(sql)
-        conn.commit()
+	conn.commit()
         cur.close()
         conn.close()
     except MySQLdb.Error,e:
-        output = open('status.txt','a')
+	output = open('/home/lihu/monitor/status.txt','a')
         output.write("\nSQL: %s\n" % (sql))
-        output.write("Mysql Error %d: %s\n" % (e.args[0], e.args[1]))
+        output.write("Mysql Error %d: %s" % (e.args[0], e.args[1]))
         output.close()
-        output = open('status.sql','a')
+        output = open('/home/lihu/monitor/status.sql','a')
         output.write("%s\n" % (sql))
         output.close()
 
@@ -27,7 +35,7 @@ def collectStatus():
     
     # Get IP address.
 
-    IP = socket.gethostbyname(socket.gethostname())
+    IP = get_ip_address("eth0")
 
     # CPU usage of all the cores (threads) in one server.
 
