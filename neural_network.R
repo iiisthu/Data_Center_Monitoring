@@ -6,7 +6,7 @@
 library(RSNNS)
 
 # Read the status data file into R.
-rawdata <- read.table("/home/swang/Documents/ServerTemperature/39.txt")
+rawdata <- read.table("/home/swang/Documents/ServerTemperature/81.txt")
 # Get the useful columns.
 data <- rawdata[,4:15]
 # In order to do the classification, it needs to obtain dicrete output values.
@@ -26,8 +26,8 @@ data = splitForTrainingAndTest(dataInputs, dataTargets, ratio=0.15)
 # Normalize input data.
 data = normTrainingAndTestSet(data)
 
-# Use mpl fuction to obtain the model.
-model = mlp(data$inputsTrain, data$targetsTrain, size=10, learnFunc="Rprop", learnFuncParams=c(0.1, 2.0, 2), maxit=1000, inputsTest=data$inputsTest, targetsTest=data$targetsTest) 
+# Use mpl fuction to obtain the model. learnFuncParams=c(0.0001, 2.0, 2),
+model = mlp(data$inputsTrain, data$targetsTrain, size=c(3), learnFunc="Std_Backpropagation", maxit=10000, inputsTest=data$inputsTest, targetsTest=data$targetsTest) 
 # Make predictions.
 predictions = predict(model, data$inputsTest)
 predictions.explict <- rep(0, length = nrow(predictions))
